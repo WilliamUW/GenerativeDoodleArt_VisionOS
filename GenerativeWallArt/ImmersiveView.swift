@@ -99,7 +99,7 @@ struct ImmersiveView: View {
                 // If both entities are children of the same anchor, you can adjust planeEntity2's position relative to planeEntity
                 planeEntity2.position = planeEntity.position + offset
                 
-                let offset3 = SIMD3<Float>(Self.planeX + 5, 0, 0)
+                let offset3 = SIMD3<Float>(Self.planeX + 4, 0, 0)
 
                 // Apply the offset to planeEntity2
                 // If both entities are children of the same anchor, you can adjust planeEntity2's position relative to planeEntity
