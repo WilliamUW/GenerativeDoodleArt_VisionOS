@@ -11,7 +11,7 @@ struct ContentView: View {
     var body: some View {
         @Bindable var viewModel = viewModel
         VStack(alignment: .leading) {
-            Text("Welcome to Generative Doodle Art in Vision Pro")
+            Text("Welcome to Eyetunes!")
                 .font(.extraLargeTitle2)
         }
         .padding(50)

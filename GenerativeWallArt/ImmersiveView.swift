@@ -37,6 +37,24 @@ struct ImmersiveView: View {
         wallAnchor.addChild(planeEntity)
         return wallAnchor
     }()
+    
+    @State var planeEntity2: Entity = {
+        let wallAnchor = AnchorEntity(.plane(.vertical, classification: .wall, minimumBounds: SIMD2<Float>(0.6, 0.6)))
+        let planeMesh = MeshResource.generatePlane(width: Self.planeX, depth: Self.planeZ, cornerRadius: 0.1)
+        let planeEntity = ModelEntity(mesh: planeMesh, materials: [ImmersiveView.loadImageMaterial(imageUrl: "photo1")])
+        planeEntity.name = "canvas"
+        wallAnchor.addChild(planeEntity)
+        return wallAnchor
+    }()
+    
+    @State var planeEntity3: Entity = {
+        let wallAnchor = AnchorEntity(.plane(.vertical, classification: .wall, minimumBounds: SIMD2<Float>(0.6, 0.6)))
+        let planeMesh = MeshResource.generatePlane(width: Self.planeX, depth: Self.planeZ, cornerRadius: 0.1)
+        let planeEntity = ModelEntity(mesh: planeMesh, materials: [ImmersiveView.loadImageMaterial(imageUrl: "photo2")])
+        planeEntity.name = "canvas"
+        wallAnchor.addChild(planeEntity)
+        return wallAnchor
+    }()
 
     var body: some View {
         @Bindable var viewModel = viewModel
@@ -64,6 +82,28 @@ struct ImmersiveView: View {
                 planeEntity.addChild(impactParticle)
                 content.add(characterEntity)
                 content.add(planeEntity)
+                content.add(planeEntity2)
+                content.add(planeEntity3)
+
+
+                // Assuming planeEntity and planeEntity2 are already defined and added to the scene
+                // And assuming planeX is the width of your planes, and they have the same height
+
+                let spacing: Float = 0.05 // Space between the two entities, in meters
+
+                // Calculate the offset needed to position planeEntity2 beside planeEntity
+                // Assuming both planes have the same dimensions and you want a small gap between them
+                let offset = SIMD3<Float>(Self.planeX + spacing, 0, 0)
+
+                // Apply the offset to planeEntity2
+                // If both entities are children of the same anchor, you can adjust planeEntity2's position relative to planeEntity
+                planeEntity2.position = planeEntity.position + offset
+                
+                let offset3 = SIMD3<Float>(Self.planeX + 5, 0, 0)
+
+                // Apply the offset to planeEntity2
+                // If both entities are children of the same anchor, you can adjust planeEntity2's position relative to planeEntity
+                planeEntity3.position = planeEntity.position + offset3
 
                 // identify assistant + applying basic animation
                 let characterAnimationSceneEntity = try await Entity(named: "CharacterAnimations", in: realityKitContentBundle)
